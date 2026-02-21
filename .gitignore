@@ -108,3 +108,28 @@ temp/
 
 # Webdev artifacts (checkpoint zips, migrations, etc.)
 .webdev/
+
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Project artifacts
+artifacts/
+screenshots/
+reports/
+
+# Credentials
+credentials.json
+service-account-key.json
+
+# Manus specific
+.manus-logs/
