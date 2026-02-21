@@ -1,0 +1,84 @@
+graph TB
+    User["👤 User<br/>Desktop Environment"]
+    
+    subgraph Frontend["🎨 Frontend Layer<br/>(React + Tailwind)"]
+        TaskForm["📝 Task Form<br/>Goal Input"]
+        Dashboard["📊 Execution Dashboard<br/>Live Progress"]
+        Gallery["🖼️ Screenshot Gallery<br/>Before/After Evidence"]
+        ReportView["📄 Report Viewer<br/>Final Results"]
+        ApprovalUI["✅ Approval Dialog<br/>Safety Checks"]
+    end
+    
+    subgraph Backend["🔧 Backend API<br/>(Express + tRPC)"]
+        Router["🛣️ tRPC Router<br/>Type-Safe Procedures"]
+        Auth["🔐 Authentication<br/>OAuth + JWT"]
+        TaskMgr["📋 Task Manager<br/>State Management"]
+    end
+    
+    subgraph Agent["🤖 Agent Orchestration<br/>(Python)"]
+        StateMachine["⚙️ State Machine<br/>Task Lifecycle"]
+        Executor["🎯 Executor<br/>Perceive-Plan-Act-Verify"]
+    end
+    
+    subgraph Tools["🛠️ Python Tools<br/>(Desktop Automation)"]
+        ScreenCap["📸 Screen Capture<br/>MSS Library"]
+        DesktopAct["🖱️ Desktop Actions<br/>PyAutoGUI"]
+        GeminiBrain["🧠 Gemini Brain<br/>Vision + Planning"]
+        Validator["✔️ Validator<br/>Success Verification"]
+        Reporter["📝 Reporter<br/>Markdown Generation"]
+        SafetyChk["🛡️ Safety Checker<br/>Risk Detection"]
+        GCSStore["☁️ GCS Storage<br/>Cloud Integration"]
+    end
+    
+    subgraph Cloud["☁️ Google Cloud Platform"]
+        GeminiAPI["🔮 Gemini Pro Vision API<br/>AI Analysis"]
+        CloudStorage["💾 Cloud Storage<br/>Artifacts"]
+        CloudSQL["🗄️ Cloud SQL<br/>Database"]
+    end
+    
+    User -->|"1. Enter Goal"| TaskForm
+    TaskForm -->|"2. Submit Task"| Router
+    Router -->|"3. Authenticate"| Auth
+    Router -->|"4. Create Task"| TaskMgr
+    TaskMgr -->|"5. Start Execution"| StateMachine
+    StateMachine -->|"6. Begin Loop"| Executor
+    
+    Executor -->|"PERCEIVE"| ScreenCap
+    ScreenCap -->|"Screenshot"| GCSStore
+    
+    Executor -->|"PLAN"| GeminiBrain
+    GeminiBrain -->|"Analyze"| GeminiAPI
+    GeminiAPI -->|"Vision Response"| GeminiBrain
+    
+    Executor -->|"Safety Check"| SafetyChk
+    SafetyChk -->|"Dangerous?"| ApprovalUI
+    ApprovalUI -->|"User Decision"| Executor
+    
+    Executor -->|"ACT"| DesktopAct
+    DesktopAct -->|"Execute Action"| User
+    
+    Executor -->|"VERIFY"| Validator
+    Validator -->|"Compare Images"| GeminiAPI
+    
+    Executor -->|"Report"| Reporter
+    Reporter -->|"Generate"| GCSStore
+    
+    TaskMgr -->|"Update Status"| Dashboard
+    Dashboard -->|"Display Progress"| Frontend
+    
+    ScreenCap -->|"Store"| CloudStorage
+    Reporter -->|"Store"| CloudStorage
+    TaskMgr -->|"Persist"| CloudSQL
+    
+    GCSStore -->|"Retrieve"| Gallery
+    Reporter -->|"Display"| ReportView
+    
+    style User fill:#1a1a1a,stroke:#ff0000,stroke-width:3px,color:#fff
+    style Frontend fill:#0a0a0a,stroke:#ff0000,stroke-width:2px,color:#fff
+    style Backend fill:#0a0a0a,stroke:#ff0000,stroke-width:2px,color:#fff
+    style Agent fill:#0a0a0a,stroke:#ff0000,stroke-width:2px,color:#fff
+    style Tools fill:#0a0a0a,stroke:#ff0000,stroke-width:2px,color:#fff
+    style Cloud fill:#1a1a2e,stroke:#ff0000,stroke-width:2px,color:#fff
+    style GeminiAPI fill:#4285f4,stroke:#fff,color:#fff
+    style CloudStorage fill:#4285f4,stroke:#fff,color:#fff
+    style CloudSQL fill:#4285f4,stroke:#fff,color:#fff
